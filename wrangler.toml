@@ -1,0 +1,38 @@
+name = "worker-tabserve-reverse-proxy"
+main = "src/index.ts"
+compatibility_date = "2023-04-27"
+# @see https://developers.cloudflare.com/workers/platform/compatibility-dates/#websocket-compression
+# This seems to cause an exception to be thrown in the worker, with no log details. Likely to be a msgpack.decode/encode for incorrect data.
+# @todo/med enable this as websockets have a 1MB limit for receiving.
+#compatibility_flags = [
+#    "web_socket_compression"
+#]
+
+
+# Overridden by .dev.vars file.
+vars = { ENV = "prod", AUTH_TOKEN = "PROD_an_example_auth_token_replace_in_wrangler_toml_vars_with_something_random_over_40_chars", USE_WS_HIBERNATION = "1" }
+
+
+# Note: "wrangler dev" in version 3+ rewrites localhost to match the zone_name when running locally.
+# - This messes up the subdomain routing as it replaces the whole hostname and all subdomains.
+#
+# Must also add CNAME * anything.example.com to Cloudflare DNS.
+#routes = [
+#    # TLS only works for first level subdomains (Total TLS = $10/month extra).
+#    # Most specific match take priority
+#    # @see https://developers.cloudflare.com/workers/platform/triggers/routes/#matching-behavior
+#    { pattern = "*.en-30.com/*", zone_name = "en-30.com" }
+#]
+
+
+[durable_objects]
+bindings = [
+    { name = "REV_PROXY_DO", class_name = "REV_PROXY_DO" }
+]
+
+# @see https://developers.cloudflare.com/workers/learning/using-durable-objects/#durable-object-migrations-in-wranglertoml
+[[migrations]]
+tag = "v1" # Should be unique for each entry
+new_classes = ["REV_PROXY_DO"] # Array of new classes
+
+

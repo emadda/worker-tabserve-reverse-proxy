@@ -1,0 +1,19 @@
+{
+    "name": "worker-tabserve-reverse-proxy",
+    "version": "0.1.0",
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20230404.0",
+        "@miniflare/tre": "^3.0.0-next.13",
+        "typescript": "^5.0.4",
+        "wrangler": "2.17.0"
+    },
+    "private": true,
+    "scripts": {
+        "start": "wrangler dev",
+        "deploy": "wrangler publish"
+    },
+    "dependencies": {
+        "@msgpack/msgpack": "^3.0.0-beta2",
+        "lodash": "^4.17.21"
+    }
+}
