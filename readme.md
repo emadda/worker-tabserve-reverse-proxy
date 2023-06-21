@@ -66,8 +66,8 @@ After setting up A and B, you can use Tabserve to route requests to a localhost 
 
 ## To do
 
-- [] Support WebSocket connections to the the public URL.
-- [] Track request stats.
+- [ ] Support WebSocket connections to the the public URL.
+- [ ] Track request stats.
 
 
 
