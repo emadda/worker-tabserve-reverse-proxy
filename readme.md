@@ -1,12 +1,12 @@
 # Tabserve Reverse Proxy
 
-This is a [Cloudflare worker](https://workers.cloudflare.com/) that works as reverse proxy for [Tabserve](tabserve.dev).
+This is a [Cloudflare worker](https://workers.cloudflare.com/) that works as reverse proxy for [Tabserve](https://tabserve.dev).
 
 Tabserve is a web app that uses browser web workers as a reverse proxy.
 
 This enables you to have a public HTTPS url and route it to a http://localhost:1234 web server running on your computer.
 
-See [Tabserve](tabserve.dev) for more details.
+See [Tabserve](https://tabserve.dev) for more details.
 
 
 ## How this worker works.
