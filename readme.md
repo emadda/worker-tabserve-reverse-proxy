@@ -9,23 +9,6 @@ This enables you to have a public HTTPS url and route it to a http://localhost:1
 See [Tabserve](https://tabserve.dev) for more details.
 
 
-## How this worker works.
-
-- It handles two subdomains:
-	- 1 . `<id>.your-domain.com`
-		- This is the public URL.
-
-
-	- 2 . `<id>-ws.your-domain.com`
-		- This is a websocket server that the Tabserve web app connects to.
-		- The Tabserve web app receives the serialized HTTP request, routes it to a localhost server, then sends back the serialized response over the same websocket connection.
-
-- Each unique subdomain `<id>` gets its own Durable Object.
-	- The hibernation API is used for WebSockets which should allow Tabserve to listen for requests constantly whilst only paying for CPU time when active.
-	- You can switch off `<id>`s in the Tabserve UI which disconnects the WebSocket preventing any charge.
-
-
-
 ## Deploy this worker to your Cloudflare account.
 
 ### A. Deploying the worker
@@ -57,6 +40,23 @@ After setting up A and B, you can use Tabserve to route requests to a localhost 
 
 - You will need to paste your `AUTH_TOKEN` into the Tabserve config.
 - When adding a server, use any `<id>.your-domain.com`, where `<id>` is any subdomain you desire.
+
+
+## How this worker works.
+
+- It handles two subdomains:
+	- 1 . `<id>.your-domain.com`
+		- This is the public URL.
+
+
+	- 2 . `<id>-ws.your-domain.com`
+		- This is a websocket server that the Tabserve web app connects to.
+		- The Tabserve web app receives the serialized HTTP request, routes it to a localhost server, then sends back the serialized response over the same websocket connection.
+
+- Each unique subdomain `<id>` gets its own Durable Object.
+	- The hibernation API is used for WebSockets which should allow Tabserve to listen for requests constantly whilst only paying for CPU time when active.
+	- You can switch off `<id>`s in the Tabserve UI which disconnects the WebSocket preventing any charge.
+
 
 
 

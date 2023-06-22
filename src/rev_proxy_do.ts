@@ -124,6 +124,7 @@ export class REV_PROXY_DO {
 
     // @todo/med Is it possible that response bytes can be returned in the incorrect order? Are writer locks queued in the order they were requested?
     // @todo/med Large downloads seem very slow (localhost -> ws messages occur very quickly, but then ws -> Response stream seems to have a bottleneck somewhere).
+    // - Fix, A: Use an HTTP POST (100MB limit for free account) to send large responses, and connect the stream to the original request to avoid the bytes being routed to the JS runtime and blocking the event loop.
     async on_ws_message(msgpack_bytes) {
         const msg = decode(msgpack_bytes);
         const {kind, data} = msg;
