@@ -32,7 +32,7 @@ See [Tabserve](https://tabserve.dev) for more details.
 
 Because this is "Proxied", the `Content` target is ignored and CF DNS returns the IP of your worker.
 
-- 4 . Add a route to your domain:
+- 4 . Add a `Workers Routes` to your domain via the menu on the left when viewing your domain:
 	- `(*.your-domain.com/*) => (worker-tabserve-reverse-proxy)`
 
 
