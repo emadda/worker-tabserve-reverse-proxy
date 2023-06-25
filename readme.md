@@ -15,7 +15,7 @@ See [Tabserve](https://tabserve.dev) for more details.
 
 - 1 . Sign up for a CF account.
 - 2 . `git clone https://github.com/emadda/worker-tabserve-reverse-proxy`
-- 3 . `npm install`
+- 3 . `npm install --omit=dev`
 - 4 . Set `AUTH_TOKEN` to a unique string over 40 chars in `wrangler.toml`
 - 5 . Deploy: `wrangler deploy`
 
