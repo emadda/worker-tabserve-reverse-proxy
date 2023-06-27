@@ -11,6 +11,8 @@ See [Tabserve](https://tabserve.dev) for more details.
 
 ## Deploy this worker to your Cloudflare account.
 
+A [video walkthrough](https://tabserve.dev/#setting-up-the-cloudflare-worker-and-dns) is available.
+
 ### A. Deploying the worker
 
 - 1 . Sign up for a CF account.
