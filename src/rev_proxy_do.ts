@@ -129,6 +129,8 @@ export class REV_PROXY_DO {
         const msg = decode(msgpack_bytes);
         const {kind, data} = msg;
 
+        console.log("ws received.");
+
         const has_req_id = (kind) => kind in [kinds.RESPONSE, kinds.RESPONSE_PART_START, kinds.RESPONSE_PART, kinds.RESPONSE_PART_END];
         if (has_req_id(kind)) {
             if (!(data.req_id in this.waiting)) {
@@ -161,6 +163,11 @@ export class REV_PROXY_DO {
                 headers: data.headers
             });
 
+			// A "Response" is resolved, but the body will continue to be streamed.
+			// Note: since 2023-06-28, `resolve(res)` has to come *before* writing to the writable side of the stream, otherwise the http response just hangs without ever returning bytes over the network to the client.
+			// - Assumption: this is an undocumented breaking change to the workers runtime.
+			x.resolve(response);
+
             x.response = response;
             x.transform_stream = transform_stream;
 
@@ -168,8 +175,6 @@ export class REV_PROXY_DO {
             await writer.write(data.bytes);
             writer.releaseLock();
 
-            // A "Response" is resolved, but the body will continue to be streamed.
-            x.resolve(response);
 
         } else if (kind === kinds.RESPONSE_PART) {
             const {req_id} = data;
